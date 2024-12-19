@@ -1,0 +1,143 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  background: linear-gradient(to bottom, #121f35, #0f172a);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Container styling */
+.auth-container {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom, #121f35, #0f172a); /* Darker blue gradient */
+}
+
+/* Card flip animation */
+.auth-card {
+  position: relative;
+  width: 400px;
+  height: 480px;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.auth-card.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Shared styling for both sides */
+.auth-side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  background: #1b2838; /* Dark blue card background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px; /* Uniform padding */
+  box-sizing: border-box;
+}
+
+.auth-side h2 {
+  color: #e3b505; /* Goldish-yellow for headings */
+  margin-bottom: 20px;
+  font-size: 1.9em;
+  font-weight: bold;
+}
+
+/* Input fields */
+.auth-input {
+  width: 100%;
+  padding: 15px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #0f172a; /* Deep dark blue input background */
+  text-align: center;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box; /* Ensures padding doesn’t increase size */
+}
+
+.auth-input:focus {
+  background-color: #16223a; /* Slightly lighter blue on focus */
+  outline: none;
+  box-shadow: 0 0 5px #e3b505; /* Glow effect */
+}
+
+/* Buttons */
+.auth-button {
+  width: 100%;
+  background-color: #e3b505; /* Goldish-yellow */
+  color: #1b2838; /* Dark blue text for contrast */
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-button:hover {
+  background-color: #d8a304; /* Darker gold */
+  transform: translateY(-3px);
+  color: white;
+}
+
+/* Back side styling */
+.back {
+  transform: rotateY(180deg);
+}
+
+/* Toggle button */
+.toggle-button {
+  background: none;
+  border: none;
+  color: #e3b505; /* Goldish-yellow */
+  font-size: 1rem;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.toggle-button:hover {
+  color: #d8a304; /* Darker gold */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .auth-card {
+    width: 90%;
+    height: 450px;
+  }
+
+  .auth-side {
+    padding: 20px 15px;
+  }
+
+  .auth-input {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  .auth-button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}

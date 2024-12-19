@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+  margin: 20px;
+}
+
+nav {
+  margin: 20px;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: blue;
+}
+
+form {
+  margin: 20px 0;
+}
+
+input[type="file"] {
+  margin-right: 10px;
+}
+
+h2 {
+  margin-top: 20px;
+}
