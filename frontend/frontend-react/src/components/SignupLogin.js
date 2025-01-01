@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SignupLogin.css";
 
-const SignupLogin = () => {
+const SignupLogin = ({ onLoginSuccess }) => {
   const [isFlipped, setIsFlipped] = useState(false); // State for flipping form
   const [formData, setFormData] = useState({
     emailOrUsername: "",
@@ -17,32 +17,55 @@ const SignupLogin = () => {
   };
 
   // Handle Login form submission
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Logging in with:", {
-      emailOrUsername: formData.emailOrUsername,
-      password: formData.password,
-    });
-    // Add login logic here
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          emailOrUsername: formData.emailOrUsername,
+          password: formData.password,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Login successful:", data);
+        onLoginSuccess(data.token); // Notify parent with the token
+      } else {
+        alert(`Login failed: ${data.message}`);
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      alert("An error occurred during login.");
+    }
   };
 
   // Handle Signup form submission
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    console.log("Creating account with:", {
-      email: formData.signupEmail,
-      username: formData.signupUsername,
-      password: formData.signupPassword,
-    });
-    // After signup, flip back to login
-    setIsFlipped(false);
-    // Clear the signup fields
-    setFormData({
-      ...formData,
-      signupEmail: "",
-      signupUsername: "",
-      signupPassword: "",
-    });
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.signupEmail,
+          username: formData.signupUsername,
+          password: formData.signupPassword,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        console.log("Signup successful:", data);
+        alert("Account created successfully. Please log in.");
+        setIsFlipped(false); // Flip back to login
+      } else {
+        alert(`Signup failed: ${data.message}`);
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      alert("An error occurred during signup.");
+    }
   };
 
   return (

@@ -16,7 +16,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1>Welcome to Sentiment Analysis</h1>
+      <h1>Welcome to SentiMeter</h1>
       <p>Analyze sentiments quickly and effortlessly.</p>
 
       <div className="review-section">

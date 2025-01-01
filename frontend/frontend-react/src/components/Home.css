@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -6,28 +7,34 @@ html, body {
   overflow-x: hidden; /* Prevent horizontal scroll */
   background: linear-gradient(to bottom, #121f35, #0f172a);
   color: white;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
 }
 
 /* Main container */
 .home-container {
   text-align: center;
   padding: 40px 20px;
-  min-height: 100vh;
+  flex-grow: 1; /* Take up remaining space */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Ensure footer is at the bottom */
+  justify-content: flex-start; /* Push content up */
   align-items: center;
+  overflow-y: auto; /* Allow vertical scrolling */
+  padding-bottom: 80px; /* Space for footer */
+  box-sizing: border-box; /* Avoid overflow */
 }
 
 /* Heading and introduction text */
 h1 {
-  font-size: 36px;
+  font-size: 48px; /* Increased size */
   margin-bottom: 10px;
   color: #f1f1f1;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Paragraph styling */
 p {
   font-size: 18px;
   color: #cfcfcf;
@@ -63,7 +70,8 @@ p {
 .review-input:focus {
   border-color: #007bff;
   outline: none;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5),
+    inset 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* Button Styling */
@@ -95,14 +103,16 @@ footer {
   width: 100%;
   background-color: #0f172a;
   color: #cfcfcf;
-  padding: 20px;
-  position: relative;
-  bottom: 0;
+  padding: 20px; /* Increased height for better spacing */
   text-align: center;
   font-size: 14px;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  bottom: 0;
+  margin-top: auto; /* Ensures footer stays at bottom */
 }
 
+/* Footer Links */
 footer a {
   color: #007bff;
   text-decoration: none;
@@ -117,9 +127,13 @@ footer a:hover {
   .review-input {
     width: 90%;
   }
-  
+
   .review-submit-button {
     width: 90%;
     font-size: 16px;
+  }
+
+  footer {
+    padding: 15px; /* Adjusted for mobile */
   }
 }

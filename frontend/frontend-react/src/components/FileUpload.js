@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Papa from "papaparse"; // Import PapaParse for CSV parsing
 import "./FileUpload.css";
 
 const FileUpload = () => {
@@ -6,18 +7,36 @@ const FileUpload = () => {
   const [uploadStatus, setUploadStatus] = useState("");
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-    setUploadStatus("");
+    const selectedFile = event.target.files[0];
+
+    // Check if the file is a valid CSV
+    if (selectedFile && selectedFile.type === "text/csv") {
+      setFile(selectedFile);
+      setUploadStatus(""); // Reset the status if the file is valid
+    } else {
+      setFile(null);
+      setUploadStatus("Please select a valid CSV file.");
+    }
   };
 
   const handleFileSubmit = (event) => {
     event.preventDefault();
+
     if (!file) {
       setUploadStatus("Please select a file to upload.");
       return;
     }
-    setUploadStatus(`File "${file.name}" uploaded successfully!`);
-    setFile(null);
+
+    // Parse the CSV file
+    Papa.parse(file, {
+      complete: (result) => {
+        console.log(result.data); // Check parsed CSV data in the console
+        setUploadStatus(`File "${file.name}" uploaded successfully!`);
+        setFile(null); // Clear the file input after successful upload
+      },
+      header: true,
+      skipEmptyLines: true,
+    });
   };
 
   return (
@@ -29,6 +48,7 @@ const FileUpload = () => {
           <input
             type="file"
             className="file-input"
+            accept=".csv" // Accept only CSV files
             onChange={handleFileChange}
           />
           <button type="submit" className="upload-button">
